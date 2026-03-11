@@ -1,0 +1,17 @@
+services:
+  blog:
+    image: ruby:3.3
+    working_dir: /site
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    volumes:
+      - ./:/site
+      - bundle_cache:/usr/local/bundle
+    command: >
+      bash -lc "bundle config set path vendor/bundle &&
+      bundle install &&
+      bundle exec jekyll serve --host 0.0.0.0 --livereload"
+
+volumes:
+  bundle_cache:

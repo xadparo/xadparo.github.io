@@ -1,0 +1,39 @@
+<aside class="site-sidebar" aria-label="Post navigation">
+  {%- assign top_level_posts = site.posts | where_exp: "post", "post.categories == empty" -%}
+  {%- assign categorized_posts = site.posts | where_exp: "post", "post.categories != empty" -%}
+  <section class="sidebar-section">
+    <ul class="sidebar-list">
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      {%- for post in top_level_posts -%}
+        <li>
+          <a href="{{ post.url | relative_url }}"{% if page.url == post.url %} aria-current="page"{% endif %}>
+            {{ post.title }}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </section>
+
+  <section class="sidebar-section">
+    <h2 class="sidebar-title">Posts</h2>
+    {%- assign grouped_posts = categorized_posts | group_by_exp: "post", "post.categories | join: '/'" -%}
+    {%- if grouped_posts.size > 0 -%}
+      {%- for group in grouped_posts -%}
+        <div class="sidebar-group">
+          <h3 class="sidebar-group-title">{{ group.name }}</h3>
+          <ul class="sidebar-list sidebar-post-list">
+            {%- for post in group.items -%}
+              <li>
+                <a href="{{ post.url | relative_url }}"{% if page.url == post.url %} aria-current="page"{% endif %}>
+                  {{ post.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    {%- elsif top_level_posts.size == 0 -%}
+      <p class="sidebar-empty">아직 게시글이 없습니다.</p>
+    {%- endif -%}
+  </section>
+</aside>

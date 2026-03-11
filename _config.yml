@@ -1,0 +1,24 @@
+title: xadparo
+email: 
+description: "xadparo의 기술 블로그"
+baseurl: ""
+url: "https://xadparo.github.io"
+lang: ko
+timezone: Asia/Seoul
+
+markdown: kramdown
+permalink: /:categories/:title/
+
+theme: minima
+plugins:
+  - jekyll-feed
+
+minima:
+  skin: classic
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post

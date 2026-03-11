@@ -1,0 +1,76 @@
+---
+---
+@import "minima";
+
+.site-frame {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.site-sidebar {
+  position: sticky;
+  top: 1rem;
+  flex: 0 0 260px;
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  border-right: 1px solid #e5e7eb;
+  padding-right: 1rem;
+}
+
+.site-main-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.sidebar-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sidebar-group-title {
+  margin: 1rem 0 0.35rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-list li {
+  margin: 0.25rem 0;
+  line-height: 1.35;
+}
+
+.sidebar-list a[aria-current="page"] {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.sidebar-empty {
+  margin: 0;
+  color: #6b7280;
+}
+
+@media (max-width: 900px) {
+  .site-frame {
+    flex-direction: column;
+  }
+
+  .site-sidebar {
+    position: static;
+    flex: 1 1 auto;
+    max-height: none;
+    border-right: 0;
+    border-bottom: 1px solid #e5e7eb;
+    padding-right: 0;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+}

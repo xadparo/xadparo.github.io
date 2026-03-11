@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+date=$(date +%Y-%m-%d)
+clock=$(TZ=Asia/Seoul date +%H%M%S)
+default_slug="post-${clock}"
+
+group_path="inbox"
+title=""
+
+if [ $# -eq 1 ]; then
+  if echo "$1" | grep -q '/'; then
+    group_path="$1"
+  else
+    title="$1"
+  fi
+fi
+
+if [ $# -ge 2 ]; then
+  group_path="$1"
+  shift
+  title="$*"
+fi
+
+# Normalize group path so it can be used as categories metadata.
+group_path=$(echo "$group_path" | sed -E 's#^/+##; s#/+$##; s#//+#/#g')
+[ -n "$group_path" ] || group_path="inbox"
+
+slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
+[ -n "$slug" ] || slug="$default_slug"
+
+dir="_posts/${group_path}"
+base_file="${dir}/${date}-${slug}"
+file="${base_file}.md"
+
+mkdir -p "$dir"
+
+seq=1
+while [ -f "$file" ]; do
+  file="${base_file}-${seq}.md"
+  seq=$((seq + 1))
+done
+
+cat > "$file" <<POST
+---
+---
+
+${title}
+POST
+
+echo "Created: $file"
+echo "Derived categories from path: ${group_path//\//, }"
