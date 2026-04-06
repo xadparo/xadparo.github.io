@@ -1,39 +1,40 @@
-<aside class="site-sidebar" aria-label="Post navigation">
-  {%- assign top_level_posts = site.posts | where_exp: "post", "post.categories == empty" -%}
-  {%- assign categorized_posts = site.posts | where_exp: "post", "post.categories != empty" -%}
-  <section class="sidebar-section">
-    <ul class="sidebar-list">
-      <li><a href="{{ '/' | relative_url }}">Home</a></li>
-      {%- for post in top_level_posts -%}
-        <li>
-          <a href="{{ post.url | relative_url }}"{% if page.url == post.url %} aria-current="page"{% endif %}>
-            {{ post.title }}
-          </a>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </section>
+{%- assign current_url = page.url | default: "/" -%}
+{%- assign sorted_tags = site.tags | sort -%}
 
-  <section class="sidebar-section">
-    <h2 class="sidebar-title">Posts</h2>
-    {%- assign grouped_posts = categorized_posts | group_by_exp: "post", "post.categories | join: '/'" -%}
-    {%- if grouped_posts.size > 0 -%}
-      {%- for group in grouped_posts -%}
-        <div class="sidebar-group">
-          <h3 class="sidebar-group-title">{{ group.name }}</h3>
-          <ul class="sidebar-list sidebar-post-list">
-            {%- for post in group.items -%}
-              <li>
-                <a href="{{ post.url | relative_url }}"{% if page.url == post.url %} aria-current="page"{% endif %}>
-                  {{ post.title }}
-                </a>
-              </li>
-            {%- endfor -%}
-          </ul>
-        </div>
-      {%- endfor -%}
-    {%- elsif top_level_posts.size == 0 -%}
-      <p class="sidebar-empty">아직 게시글이 없습니다.</p>
+<aside class="site-sidebar" aria-label="Sidebar">
+  <div class="site-sidebar-inner">
+    <a class="site-brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+
+    <nav class="sidebar-nav" aria-label="Primary">
+      <a class="sidebar-link{% if current_url == '/' %} is-active{% endif %}" href="{{ '/' | relative_url }}">
+        Home
+      </a>
+      <a class="sidebar-link{% if current_url == '/about/' %} is-active{% endif %}" href="{{ '/about/' | relative_url }}">
+        About me
+      </a>
+      <a class="sidebar-link{% if current_url == '/posts/' or page.layout == 'post' %} is-active{% endif %}" href="{{ '/posts/' | relative_url }}">
+        Posts
+      </a>
+    </nav>
+
+    {%- if sorted_tags.size > 0 -%}
+      <section class="sidebar-tags" aria-labelledby="sidebar-tags-title">
+        <h2 id="sidebar-tags-title">tags</h2>
+        <nav class="sidebar-tag-list" aria-label="Tags">
+          {%- for tag_entry in sorted_tags -%}
+            {%- assign tag_name = tag_entry[0] -%}
+            {%- assign tag_posts = tag_entry[1] -%}
+            {%- assign tag_slug = tag_name | slugify -%}
+            {%- assign is_active_tag = false -%}
+            {%- if page.tags contains tag_name or page.tag == tag_name -%}
+              {%- assign is_active_tag = true -%}
+            {%- endif -%}
+            <a class="sidebar-link{% if is_active_tag %} is-active{% endif %}" href="{{ '/posts/#tag-' | append: tag_slug | relative_url }}">
+              {{ tag_name }}({{ tag_posts.size }})
+            </a>
+          {%- endfor -%}
+        </nav>
+      </section>
     {%- endif -%}
-  </section>
+  </div>
 </aside>

@@ -1,80 +1,25 @@
 # xadparo.github.io
 
-`xadparo`의 Markdown 기반 GitHub Pages 블로그(Jekyll) 프로젝트입니다.
+Jekyll 기반 GitHub Pages 사이트의 최소 시작점입니다.
 
-## 포함된 기능
+## 현재 상태
 
-- `_posts`의 Markdown 글을 페이지로 자동 생성
-- 포스트 디렉터리 구조를 카테고리 메타데이터로 사용
-- 로컬 개발 서버에서 변경사항 자동 반영(`livereload`)
-- `main` 브랜치 푸시 시 GitHub Actions로 Pages 자동 배포
+- 기존 페이지와 포스트를 제거하고 초기 상태로 되돌렸습니다.
+- 배포 워크플로와 기본 Jekyll 설정은 유지되어 있습니다.
+- 홈 화면은 새 사이트를 위한 임시 시작 페이지 한 장만 남겨둔 상태입니다.
 
-## 글 작성 방식
+## 로컬 실행
 
-게시글 파일 위치(권장 규칙):
-- `_posts/{post-group nested path}/YYYY-MM-DD-title.md`
-- 예: `_posts/dev/frontend/2026-03-05-nextjs-isr.md`
-
-이 구조에서 `dev/frontend`는 Jekyll의 `categories`로 해석됩니다.
-
-빠른 생성(입력 최소화):
 ```bash
-./script/new-post
-# -> _posts/inbox/YYYY-MM-DD-post-HHMMSS.md 생성
-
-./script/new-post "포스트 제목"
-# -> _posts/inbox/YYYY-MM-DD-{slug}.md 생성
-
-./script/new-post dev/frontend "Next.js ISR 정리"
-# -> _posts/dev/frontend/YYYY-MM-DD-{slug}.md 생성
-```
-
-예시 front matter:
-```markdown
----
----
-
-본문 Markdown
-```
-
-참고:
-- `categories`는 front matter에 쓰지 않아도 디렉터리 경로에서 자동 파생됩니다.
-- `layout`은 `_config.yml` 기본값으로 자동 적용됩니다.
-
-## 로컬 서빙 (권장: Docker)
-
-시작:
-```bash
-docker compose up
-```
-
-접속:
-- http://127.0.0.1:4000
-
-특징:
-- 파일 수정 시 자동 빌드/자동 새로고침
-- 로컬 Ruby 버전 영향을 받지 않음
-
-## 로컬 서빙 (로컬 Ruby 직접 사용)
-
-권장 런타임:
-- Ruby 3.x
-- Bundler 2.x
-
-설치 및 실행:
-```bash
-bundle config set path vendor/bundle
 bundle install
 bundle exec jekyll serve --livereload
 ```
 
-## GitHub Pages 자동 배포
+기본 접속 주소:
+- http://127.0.0.1:4000
 
-워크플로 파일:
-- `.github/workflows/pages.yml`
+## 다음 작업 추천
 
-필수 설정(저장소 한 번만):
-1. GitHub 저장소 `Settings > Pages`
-2. `Build and deployment`의 Source를 `GitHub Actions`로 선택
-
-이후 `main`에 푸시하면 자동으로 빌드/배포됩니다.
+1. 사이트 제목과 설명을 [`_config.yml`](/mnt/c/workspace/xadparo.github.io/_config.yml)에서 정리
+2. 홈 화면을 [`index.md`](/mnt/c/workspace/xadparo.github.io/index.md)에서 새로 작성
+3. 필요하면 레이아웃, 스타일, 포스트 구조를 다시 설계

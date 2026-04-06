@@ -1,17 +1,21 @@
 services:
   blog:
-    image: ruby:3.3
+    build:
+      context: .
     working_dir: /site
     ports:
       - "4000:4000"
       - "35729:35729"
     volumes:
       - ./:/site
-      - bundle_cache:/usr/local/bundle
-    command: >
-      bash -lc "bundle config set path vendor/bundle &&
-      bundle install &&
-      bundle exec jekyll serve --host 0.0.0.0 --livereload"
+    command: bundle exec jekyll serve --host 0.0.0.0 --livereload --force_polling
 
-volumes:
-  bundle_cache:
+  writer:
+    build:
+      context: .
+    working_dir: /site
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./:/site
+    command: bundle exec ruby script/local-writer.rb

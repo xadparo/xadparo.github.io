@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<section class="page-panel post-index-panel">
+  <header class="page-header">
+    <h1>{{ page.title }}</h1>
+    {%- if page.description -%}
+      <p class="page-description">{{ page.description }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="page-body">
+    {{ content }}
+    {%- include post-list.html -%}
+  </div>
+</section>

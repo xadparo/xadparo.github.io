@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<article class="page-panel post-panel">
+  <header class="page-header">
+    <h1>{{ page.title }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+      {%- if page.tags and page.tags.size > 0 -%}
+        <p class="post-tags">
+          {%- for tag in page.tags -%}
+            <a href="{{ '/posts/#tag-' | append: (tag | slugify) | relative_url }}">#{{ tag }}</a>
+          {%- endfor -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </header>
+
+  <div class="page-body">
+    {{ content }}
+  </div>
+</article>

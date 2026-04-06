@@ -1,6 +1,6 @@
 title: xadparo
-email: 
-description: "xadparo의 기술 블로그"
+email:
+description: "새로 구성 중인 사이트"
 baseurl: ""
 url: "https://xadparo.github.io"
 lang: ko
@@ -13,12 +13,20 @@ theme: minima
 plugins:
   - jekyll-feed
 
-minima:
-  skin: classic
-
 defaults:
   - scope:
       path: ""
       type: "posts"
     values:
       layout: post
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
+
+exclude:
+  - private
+  - script
+  - vendor
+  - .bundle
