@@ -3,7 +3,6 @@
 {%- if all_posts.size > 0 -%}
   <section class="post-index-section" aria-labelledby="all-posts-title">
     <div class="section-heading">
-      <p class="section-eyebrow">Archive</p>
       <h2 id="all-posts-title">All Posts</h2>
     </div>
     <ul class="post-list">
@@ -48,10 +47,4 @@
       </section>
     {%- endfor -%}
   {%- endif -%}
-{%- else -%}
-  <section class="empty-state">
-    <p class="section-eyebrow">Posts</p>
-    <h2>아직 작성된 글이 없습니다.</h2>
-    <p>첫 포스트를 추가하면 이 페이지에 자동으로 목록과 태그 메뉴가 표시됩니다.</p>
-  </section>
 {%- endif -%}

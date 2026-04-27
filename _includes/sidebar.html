@@ -7,9 +7,6 @@
 
     <nav class="sidebar-nav" aria-label="Primary">
       <a class="sidebar-link{% if current_url == '/' %} is-active{% endif %}" href="{{ '/' | relative_url }}">
-        Home
-      </a>
-      <a class="sidebar-link{% if current_url == '/about/' %} is-active{% endif %}" href="{{ '/about/' | relative_url }}">
         About me
       </a>
       <a class="sidebar-link{% if current_url == '/posts/' or page.layout == 'post' %} is-active{% endif %}" href="{{ '/posts/' | relative_url }}">
