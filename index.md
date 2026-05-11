@@ -6,6 +6,7 @@ body_class: about-page
 ---
 
 xadparo(원하는 대로 읽습니다. 자드파로, 엑사패로우 라고 읽을때가 많습니다.)는 paradox의 애너그램입니다.  
+
 Email: [nate.xadparo@gmail.com](nate.xadparo@gmail.com)  
 Github profile: [xadparo](https://github.com/xadparo)  
 
